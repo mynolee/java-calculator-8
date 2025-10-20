@@ -70,4 +70,20 @@ public class Application {
         int delimiterEndIndex = findDelimiterEndIndex(input);
         return input.substring(delimiterEndIndex + NEWLINE_TOKEN.length());
     }
+
+    private static int computeSum(String numbers, String delimiterRegex) {
+        String[] numberTexts = splitNumbers(numbers, delimiterRegex);
+        int sum = 0;
+
+        for (String numberText : numberTexts) {
+            if (isEmpty(numberText)) {
+                continue;
+            }
+            String trimmedNumber = numberText.trim();
+            validatePositiveNumber(trimmedNumber);
+            sum += parseToInt(trimmedNumber);
+        }
+
+        return sum;
+    }
 }
