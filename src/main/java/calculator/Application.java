@@ -58,4 +58,16 @@ public class Application {
         }
         return index;
     }
+
+    private static String extractNumberSection(String input) {
+        if (hasCustomDelimiter(input)) {
+            return removeDelimiterDeclaration(input);
+        }
+        return input;
+    }
+
+    private static String removeDelimiterDeclaration(String input) {
+        int delimiterEndIndex = findDelimiterEndIndex(input);
+        return input.substring(delimiterEndIndex + NEWLINE_TOKEN.length());
+    }
 }
