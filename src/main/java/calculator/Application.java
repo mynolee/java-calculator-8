@@ -86,4 +86,28 @@ public class Application {
 
         return sum;
     }
+
+    private static String[] splitNumbers(String numbers, String delimiterRegex) {
+        return numbers.split(delimiterRegex);
+    }
+
+    private static boolean isEmpty(String text) {
+        return text == null || text.trim().isEmpty();
+    }
+
+    private static void validatePositiveNumber(String numberText) {
+        if (!numberText.matches("^-?\\d+$")) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + numberText);
+        }
+
+        int number = Integer.parseInt(numberText);
+
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + numberText);
+        }
+    }
+
+    private static int parseToInt(String numberText) {
+        return Integer.parseInt(numberText);
+    }
 }
