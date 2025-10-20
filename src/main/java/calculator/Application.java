@@ -26,4 +26,8 @@ public class Application {
         String numberSection = extractNumberSection(input);
         return computeSum(numberSection, delimiterRegex);
     }
+
+    private static boolean isNullOrEmpty(String input) {
+        return input == null || input.trim().isEmpty();
+    }
 }
