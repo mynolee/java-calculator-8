@@ -30,4 +30,32 @@ public class Application {
     private static boolean isNullOrEmpty(String input) {
         return input == null || input.trim().isEmpty();
     }
+
+    private static String resolveDelimiter(String input) {
+        if (hasCustomDelimiter(input)) {
+            return parseCustomDelimiter(input);
+        }
+        return DEFAULT_DELIMITERS_REGEX;
+    }
+
+    private static boolean hasCustomDelimiter(String input) {
+        return input.startsWith(CUSTOM_DELIMITER_PREFIX);
+    }
+
+    private static String parseCustomDelimiter(String input) {
+        int delimiterEndIndex = findDelimiterEndIndex(input);
+        String rawDelimiter = input.substring(
+                CUSTOM_DELIMITER_PREFIX.length(),
+                delimiterEndIndex
+        );
+        return Pattern.quote(rawDelimiter);
+    }
+
+    private static int findDelimiterEndIndex(String input) {
+        int index = input.indexOf(NEWLINE_TOKEN);
+        if (index == INDEX_NOT_FOUND) {
+            throw new IllegalArgumentException("입력에서 " + NEWLINE_TOKEN + "을 찾을 수 없습니다.");
+        }
+        return index;
+    }
 }
