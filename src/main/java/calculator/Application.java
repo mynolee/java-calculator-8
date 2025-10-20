@@ -16,4 +16,14 @@ public class Application {
         int sum = calculateSum(input);
         System.out.println("결과 : " + sum);
     }
+
+    public static int calculateSum(String input) {
+        if (isNullOrEmpty(input)) {
+            return 0;
+        }
+
+        String delimiterRegex = resolveDelimiter(input);
+        String numberSection = extractNumberSection(input);
+        return computeSum(numberSection, delimiterRegex);
+    }
 }
